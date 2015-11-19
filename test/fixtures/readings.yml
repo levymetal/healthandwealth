@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  date: 2015-11-20 10:21:01
+  systolic: 1
+  diastolic: 1
+  heart_rate: 1
+  user_id: 1
+
+two:
+  date: 2015-11-20 10:21:01
+  systolic: 1
+  diastolic: 1
+  heart_rate: 1
+  user_id: 1
