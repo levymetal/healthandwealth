@@ -18,8 +18,8 @@
   <tbody>
     <% @readings.each do |reading| %>
       <tr>
-        <td><%= reading.date %></td>
-        <td><%= reading.user.name %></td>
+        <td><%= time_ago_in_words reading.date %> ago</td>
+        <td><%= link_to reading.user.name, reading.user %></td>
         <td><%= reading.systolic %></td>
         <td><%= reading.diastolic %></td>
         <td><%= reading.heart_rate %></td>
@@ -39,7 +39,7 @@
           <% end %>
         </td>
         <td><%= link_to 'Edit', edit_reading_path(reading) %></td>
-        <td><%= link_to 'Destroy', reading, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%#= link_to 'Destroy', reading, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
