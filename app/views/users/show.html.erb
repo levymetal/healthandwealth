@@ -8,8 +8,113 @@
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>
 
+<h2>Past week</h2>
 
-<h2>Readings</h2>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Systolic</th>
+      <th>Diastolic</th>
+      <th>Heart rate</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% systolic = 0 %>
+    <% diastolic = 0 %>
+    <% heart_rate = 0 %>
+
+    <% @user.readings.recent.each do |reading| %>
+      <% systolic   += reading.systolic %>
+      <% diastolic  += reading.diastolic %>
+      <% heart_rate += reading.heart_rate %>
+    <% end %>
+    
+    <% if @user.readings.recent.count > 0 %>
+      <% systolic = systolic / @user.readings.recent.count %>
+      <% diastolic = diastolic / @user.readings.recent.count %>
+      <% heart_rate = heart_rate / @user.readings.recent.count %>
+    <% end %>
+
+    <tr>
+      <td><%= systolic %></td>
+      <td><%= diastolic %></td>
+      <td><%= heart_rate %></td>
+      <td>
+        <% if systolic != nil and diastolic != nil %>
+          <% if systolic < 120 and diastolic < 80 %>
+            Normal
+          <% elsif systolic < 140 and diastolic < 90 %>
+            Prehypertension
+          <% elsif systolic < 160 and diastolic < 100 %>
+            Hypertension Stage 1
+          <% elsif systolic < 180 and diastolic < 110 %>
+            Hypertension Stage 2
+          <% else %>
+            EMERGENCY CARE NEEDED
+          <% end %>
+        <% end %>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+<h2>All time average</h2>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Systolic</th>
+      <th>Diastolic</th>
+      <th>Heart rate</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% systolic = 0 %>
+    <% diastolic = 0 %>
+    <% heart_rate = 0 %>
+
+    <% @user.readings.each do |reading| %>
+      <% systolic   += reading.systolic %>
+      <% diastolic  += reading.diastolic %>
+      <% heart_rate += reading.heart_rate %>
+    <% end %>
+
+    <% if @user.readings.count > 0 %>
+      <% systolic = systolic / @user.readings.count %>
+      <% diastolic = diastolic / @user.readings.count %>
+      <% heart_rate = heart_rate / @user.readings.count %>
+    <% end %>
+
+    <tr>
+      <td><%= systolic %></td>
+      <td><%= diastolic %></td>
+      <td><%= heart_rate %></td>
+      <td>
+        <% if systolic != nil and diastolic != nil %>
+          <% if systolic < 120 and diastolic < 80 %>
+            Normal
+          <% elsif systolic < 140 and diastolic < 90 %>
+            Prehypertension
+          <% elsif systolic < 160 and diastolic < 100 %>
+            Hypertension Stage 1
+          <% elsif systolic < 180 and diastolic < 110 %>
+            Hypertension Stage 2
+          <% else %>
+            EMERGENCY CARE NEEDED
+          <% end %>
+        <% end %>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+<h2>All Readings</h2>
 
 <table class="table table-striped">
   <thead>
