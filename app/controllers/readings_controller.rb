@@ -1,6 +1,8 @@
 class ReadingsController < ApplicationController
   before_action :set_reading, only: [:show, :edit, :update, :destroy]
 
+  protect_from_forgery :except => :create
+
   # GET /readings
   # GET /readings.json
   def index
